@@ -8,7 +8,7 @@ import copy
 import time
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
-from datetime import timedelta
+from datetime import datetime, timedelta
 from enum import Enum
 from io import StringIO
 from typing import Any
@@ -16,7 +16,6 @@ from unittest import mock
 
 import orjson
 import time_machine
-from dateutil.parser import parse as dateparser
 from django.utils.timezone import now as timezone_now
 from typing_extensions import override
 
@@ -269,7 +268,7 @@ from zerver.lib.test_helpers import (
     reset_email_visibility_to_everyone_in_zulip_realm,
     stdout_suppressed,
 )
-from zerver.lib.timestamp import convert_to_UTC, datetime_to_timestamp
+from zerver.lib.timestamp import datetime_to_timestamp
 from zerver.lib.topic import TOPIC_NAME
 from zerver.lib.types import (
     Invitee,
@@ -5617,7 +5616,7 @@ class ScheduledMessagesEventsTest(BaseAction):
                 [self.get_stream_id("Verona")],
                 "Test topic",
                 "Stream message",
-                convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+                datetime.fromisoformat("2023-04-19 18:24:56+00:00"),
                 self.user_profile.realm,
             )
         check_scheduled_message_add("events[0]", events[0])
@@ -5631,7 +5630,7 @@ class ScheduledMessagesEventsTest(BaseAction):
             [self.get_stream_id("Verona")],
             "Test topic",
             "Stream message 1",
-            convert_to_UTC(dateparser("2023-04-19 17:24:56")),
+            datetime.fromisoformat("2023-04-19 17:24:56+00:00"),
             self.user_profile.realm,
         )
 
@@ -5644,7 +5643,7 @@ class ScheduledMessagesEventsTest(BaseAction):
                 [self.get_stream_id("Verona")],
                 "Test topic",
                 "Stream message 2",
-                convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+                datetime.fromisoformat("2023-04-19 18:24:56+00:00"),
                 self.user_profile.realm,
             )
         check_scheduled_message_add("events[0]", events[0])
@@ -5659,7 +5658,7 @@ class ScheduledMessagesEventsTest(BaseAction):
                 [self.example_user("hamlet").id],
                 None,
                 "Direct message",
-                convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+                datetime.fromisoformat("2023-04-19 18:24:56+00:00"),
                 self.user_profile.realm,
             )
         check_scheduled_message_add("events[0]", events[0])
@@ -5672,7 +5671,7 @@ class ScheduledMessagesEventsTest(BaseAction):
             [self.get_stream_id("Verona")],
             "Test topic",
             "Stream message",
-            convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+            datetime.fromisoformat("2023-04-19 18:24:56+00:00"),
             self.user_profile.realm,
         )
         with self.verify_action() as events:
@@ -5684,7 +5683,7 @@ class ScheduledMessagesEventsTest(BaseAction):
                 None,
                 "Edited test topic",
                 "Edited stream message",
-                convert_to_UTC(dateparser("2023-04-20 18:24:56")),
+                datetime.fromisoformat("2023-04-20 18:24:56+00:00"),
                 self.user_profile.realm,
             )
         check_scheduled_message_update("events[0]", events[0])
@@ -5697,7 +5696,7 @@ class ScheduledMessagesEventsTest(BaseAction):
             [self.get_stream_id("Verona")],
             "Test topic",
             "Stream message",
-            convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+            datetime.fromisoformat("2023-04-19T18:24:56+00:00"),
             self.user_profile.realm,
         )
         with self.verify_action() as events:
@@ -5711,7 +5710,7 @@ class RemindersEventsTest(BaseAction):
             self.user_profile,
             get_client("website"),
             message_id,
-            convert_to_UTC(dateparser("2023-04-19 18:24:56")),
+            datetime.fromisoformat("2023-04-19 18:24:56+00:00"),
             note="",
         )
 

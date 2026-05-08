@@ -15,8 +15,6 @@ from urllib.parse import parse_qs, parse_qsl, urlencode, urljoin, urlsplit, urlu
 from xml.etree.ElementTree import Element, SubElement
 
 import ahocorasick
-import dateutil.parser
-import dateutil.tz
 import lxml.etree
 import markdown
 import markdown.blockprocessors
@@ -62,7 +60,6 @@ from zerver.lib.thumbnail import (
     rewrite_thumbnailed_images,
 )
 from zerver.lib.timeout import unsafe_timeout
-from zerver.lib.timezone import common_timezones
 from zerver.lib.topic_link_util import TOPIC_LINK_SYNTAX_FOR_DISPLAY
 from zerver.lib.types import LinkifierDict
 from zerver.lib.url_encoding import encode_channel, encode_hash_component
@@ -1240,14 +1237,8 @@ class Timestamp(markdown.inlinepatterns.Pattern):
     def handleMatch(self, match: Match[str]) -> Element | str:
         time_input_string = match.group("time")
         try:
-            timestamp = dateutil.parser.parse(time_input_string, tzinfos=common_timezones)
-        except (ValueError, OverflowError):
-            try:
-                timestamp = datetime.fromtimestamp(float(time_input_string), tz=timezone.utc)
-            except ValueError:
-                timestamp = None
-
-        if not timestamp:
+            timestamp = datetime.fromisoformat(time_input_string)
+        except ValueError:
             return f"&lt;time:{time_input_string}&gt;"
 
         # Use HTML5 <time> element for valid timestamps.

@@ -20,6 +20,11 @@ format used by the Zulip server that they are interacting with.
 
 ## Changes in Zulip 13.0
 
+**Feature level 503**
+
+* [Message formatting](/api/message-formatting): The global time
+  syntax only recognizes ISO 8601 formatted timestamps.
+
 **Feature level 502**
 
 No changes; start of Zulip 13.0 development branch.

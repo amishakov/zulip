@@ -19,6 +19,9 @@ for syntax highlighting. This field is used in the
 
 ## Global times
 
+**Changes**: In Zulip 13.0 (feature level 503), the global time
+syntax only recognizes ISO 8601 formatted timestamps.
+
 **Changes**: In Zulip 12.0 (feature level 451), invalid timestamp formats
 are now rendered as escaped literal text instead of a `<span>` element with
 `timestamp-error` class and an error message.

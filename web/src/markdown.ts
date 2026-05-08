@@ -572,16 +572,7 @@ function handleLinkifier({
 }
 
 function handleTimestamp(time_string: string): string {
-    let timeobject;
-    const time = Number(time_string);
-
-    if (Number.isNaN(time)) {
-        timeobject = new Date(time_string); // not a Unix timestamp
-    } else {
-        // JavaScript dates are in milliseconds, Unix timestamps are in seconds
-        timeobject = new Date(time * 1000);
-    }
-
+    const timeobject = new Date(time_string);
     const escaped_time = _.escape(time_string);
     if (!isValid(timeobject) || getUnixTime(timeobject) < 0) {
         // Unsupported time format: rerender accordingly.

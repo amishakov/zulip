@@ -76,9 +76,6 @@ prod = [
   # Needed for compression support in memcached via python-binary-memcached
   "django-bmemcached",
 
-  # Needed for zerver/tests/test_timestamp.py
-  "python-dateutil",
-
   # Needed for Redis
   "redis",
 
@@ -316,7 +313,6 @@ dev = [
   "types-psycopg2",
   "types-Pygments",
   "types-pyOpenSSL",
-  "types-python-dateutil",
   "types-PyYAML",
   "types-redis",
   "types-regex",

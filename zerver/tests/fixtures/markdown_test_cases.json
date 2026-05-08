@@ -811,17 +811,16 @@
       "text_content": "gonna take a break for a bit--all yours if you want to play around too. what I did:\n\ninstall cmake\ngit clone zulip desktop\nrun cmake-gui .. in c:\\zulip\\zulip-desktop\\msvcbuild\nhit configure\/generate until it generated the msvc project (had to make a fix to some cmake files)\nopened vs2013 \ntried to build\n"
     },
     {
-      "name": "timestamp_backend_markdown_only",
-      "input": "<time:Jun 5th 2017, 10:30PM>",
-      "expected_output": "<p><time datetime=\"2017-06-05T22:30:00Z\">Jun 5th 2017, 10:30PM</time></p>",
-      "marked_expected_output": "<p><span>Jun 5th 2017, 10:30PM</span></p>",
-      "text_content": "Jun 5th 2017, 10:30PM"
+      "name": "timestamp_no_timezone",
+      "input": "<time:2017-06-05T22:30>",
+      "expected_output": "<p><time datetime=\"2017-06-05T22:30:00Z\">2017-06-05T22:30</time></p>",
+      "text_content": "2017-06-05T22:30"
     },
     {
-      "name": "timestamp_backend_markdown_and_marked",
-      "input": "<time:31 Dec 2017>",
-      "expected_output": "<p><time datetime=\"2017-12-31T00:00:00Z\">31 Dec 2017</time></p>",
-      "text_content": "31 Dec 2017"
+      "name": "timestamp_date_only",
+      "input": "<time:2017-12-31>",
+      "expected_output": "<p><time datetime=\"2017-12-31T00:00:00Z\">2017-12-31</time></p>",
+      "text_content": "2017-12-31"
     },
     {
       "name": "timestamp_invalid_input",
@@ -832,10 +831,9 @@
     },
     {
       "name": "timestamp_timezone",
-      "input": "<time:31 Dec 2017 5:30 am IST>",
-      "expected_output": "<p><time datetime=\"2017-12-31T00:00:00Z\">31 Dec 2017 5:30 am IST</time></p>",
-      "marked_expected_output": "<p><span>31 Dec 2017 5:30 am IST</span></p>",
-      "text_content": "31 Dec 2017 5:30 am IST"
+      "input": "<time:2017-12-31T05:30+05:30>",
+      "expected_output": "<p><time datetime=\"2017-12-31T00:00:00Z\">2017-12-31T05:30+05:30</time></p>",
+      "text_content": "2017-12-31T05:30+05:30"
     },
     {
       "name": "timestamp_incorrect",
@@ -857,19 +855,6 @@
       "expected_output": "<p>&lt;time:0001-01-01T01:00:00+02:00&gt;</p>",
       "marked_expected_output": "<p><span>0001-01-01T01:00:00+02:00</span></p>",
       "text_content": "<time:0001-01-01T01:00:00+02:00>"
-    },
-    {
-      "name": "timestamp_unix",
-      "input": "Let's meet at <time:1496701800>.",
-      "expected_output": "<p>Let's meet at <time datetime=\"2017-06-05T22:30:00Z\">1496701800</time>.</p>",
-      "text_content": "Let's meet at 1496701800."
-    },
-    {
-      "name": "timestamp_unix_overflow",
-      "input": "Let's meet at <time:1234567890123>.",
-      "expected_output": "<p>Let's meet at &lt;time:1234567890123&gt;.</p>",
-      "marked_expected_output": "<p>Let's meet at <time datetime=\"+041091-11-25T05:02:03Z\">1234567890123</time>.</p>",
-      "text_content": "Let's meet at <time:1234567890123>."
     },
     {
       "name": "tex_inline",
