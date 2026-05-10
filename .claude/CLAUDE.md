@@ -548,7 +548,7 @@ Output the PR description in a markdown code block so that formatting
 Recommend pausing for discussion when:
 
 - The approach involves security-sensitive code
-- Database migrations are needed
+- Database migrations are needed (See `docs/subsystems/schema-migrations.md`).
 - The change affects many files (>10)
 - Performance implications are unclear
 - The feature design isn't fully specified
